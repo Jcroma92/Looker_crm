@@ -11,7 +11,7 @@ datagroup: looker_crm_default_datagroup {
 persist_with: looker_crm_default_datagroup
 
 explore: mda_ac_datos_fmes_rep {
-  label: "Situación Cartera Crediticia"
+  label: "Cartera creditica crm"
   description: "Estado de la cartera crediticia de una entidad a una fecha"
 
   join: mda_ac_dia_rep {
