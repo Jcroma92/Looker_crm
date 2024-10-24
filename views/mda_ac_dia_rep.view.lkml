@@ -93,12 +93,6 @@ view: mda_ac_dia_rep {
     sql: ${TABLE}.SITUACION_DEFAULT ;;
   }
 
-
-  measure: N_Acuerdos {
-    type: count
-
-  }
-
   dimension: cod_producto {
     type: string
     sql: concat(${TABLE}.COD_LINEA, ${TABLE}.ID_GRP_PD) ;;
@@ -122,25 +116,33 @@ view: mda_ac_dia_rep {
     sql: ${mi_sdo_dud_comisio}+${mi_sdo_dud_gastos}+${mi_sdo_dud_interes}+${mi_sdo_dud_vencido}+${mi_sdo_dud_pte_vto} ;;
     value_format_name: eur
   }
-  measure: Saldo_Impagado{
-    type: sum
-    sql: ${mi_sdo_dud_comisio}+${mi_sdo_dud_gastos}+${mi_sdo_dud_interes}+${mi_sdo_dud_vencido} ;;
-    value_format_name: eur
-  }
-  measure:N_Clientes {
+
+# Métrica para contar el número de acuerdos
+  measure: n_acuerdos {
     type: count_distinct
-    sql: ${id_interno_pe} ;;
-
+    sql: ${mi_sdo_dud_vencido} ;;  # Esta es la columna que cuenta los acuerdos
+    label: "Nº Acuerdos"
   }
 
-  measure: N_Acuerdos_Mes_Ant{
-    type: number
-    sql:
-      LAG(SUM(${N_Acuerdos})) OVER (
-        ORDER BY ${mi_fecha_proc_date}
-      )
-    ;;
+# Métrica para contar el número de clientes (clientes únicos)
+  measure: n_clientes {
+    type: count_distinct
+    sql: ${id_interno_pe} ;;  # Esta es la columna para contar clientes únicos
+    label: "Nº Clientes"
+  }
 
+# Métrica para calcular el saldo total del acuerdo
+  measure: saldo_total_acuerdo {
+    type: sum
+    sql: ${mi_sdo_dud_vencido} + ${mi_sdo_dud_interes} + ${mi_sdo_dud_comisio} + ${mi_sdo_dud_gastos} + ${mi_sdo_dud_pte_vto} ;;
+    label: "Saldo Total Acuerdo"
+  }
+
+# Métrica para calcular el saldo impagado
+  measure: saldo_impagado {
+    type: sum
+    sql: ${mi_sdo_dud_vencido} + ${mi_sdo_dud_interes} + ${mi_sdo_dud_comisio} + ${mi_sdo_dud_gastos} ;;
+    label: "Saldo Impagado"
   }
 
 }
