@@ -117,32 +117,5 @@ view: mda_ac_dia_rep {
     value_format_name: eur
   }
 
-# Métrica para contar el número de acuerdos
-  measure: n_acuerdos {
-    type: count_distinct
-    sql: ${mi_sdo_dud_vencido} ;;  # Esta es la columna que cuenta los acuerdos
-    label: "Nº Acuerdos"
-  }
-
-# Métrica para contar el número de clientes (clientes únicos)
-  measure: n_clientes {
-    type: count_distinct
-    sql: ${id_interno_pe} ;;  # Esta es la columna para contar clientes únicos
-    label: "Nº Clientes"
-  }
-
-# Métrica para calcular el saldo total del acuerdo
-  measure: saldo_total_acuerdo {
-    type: sum
-    sql: ${mi_sdo_dud_vencido} + ${mi_sdo_dud_interes} + ${mi_sdo_dud_comisio} + ${mi_sdo_dud_gastos} + ${mi_sdo_dud_pte_vto} ;;
-    label: "Saldo Total Acuerdo"
-  }
-
-# Métrica para calcular el saldo impagado
-  measure: saldo_impagado {
-    type: sum
-    sql: ${mi_sdo_dud_vencido} + ${mi_sdo_dud_interes} + ${mi_sdo_dud_comisio} + ${mi_sdo_dud_gastos} ;;
-    label: "Saldo Impagado"
-  }
 
 }
