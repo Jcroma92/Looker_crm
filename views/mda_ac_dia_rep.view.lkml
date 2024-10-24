@@ -117,13 +117,11 @@ view: mda_ac_dia_rep {
     value_format_name: eur
   }
 
-
   measure: Saldo_Impagado{
     type: sum
     sql: ${mi_sdo_dud_comisio}+${mi_sdo_dud_gastos}+${mi_sdo_dud_interes}+${mi_sdo_dud_vencido} ;;
     value_format_name: eur
   }
-
 
   measure:N_Clientes {
     type: count_distinct
