@@ -111,7 +111,7 @@ view: mda_ac_dia_rep {
     datatype: date
     sql: LAST_DAY(DATE_ADD(${TABLE}.MI_FECHA_PROC, INTERVAL -1 MONTH)) ;;
   }
-  measure: Saldo_Total{
+  measure: Saldo_Total_Acuerdo{
     type: sum
     sql: ${mi_sdo_dud_comisio}+${mi_sdo_dud_gastos}+${mi_sdo_dud_interes}+${mi_sdo_dud_vencido}+${mi_sdo_dud_pte_vto} ;;
     value_format_name: eur
