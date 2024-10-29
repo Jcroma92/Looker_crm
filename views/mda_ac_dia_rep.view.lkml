@@ -123,12 +123,6 @@ view: mda_ac_dia_rep {
     value_format_name: eur
   }
 
-  measure:N_Clientes {
-    type: count_distinct
-    sql: ${id_interno_pe} ;;
-
-  }
-
   measure: n_acuerdos {
     type: count_distinct
     sql: ${num_sec_ac} ;;  # Puedes usar un campo único para contar acuerdos, como el identificador del acuerdo (num_sec_ac)
